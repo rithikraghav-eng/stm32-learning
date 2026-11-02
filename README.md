@@ -37,7 +37,7 @@ The goal is to understand how microcontrollers work internally, develop peripher
 
 ### 01. GPIO Programming
 - [x] LED Blink
-- [ ] Button Input – Polling
+- [x] Button Input – Polling
 - [ ] Multiple GPIO Outputs
 - [ ] Knight Rider LED Sequence
 - [ ] GPIO Input and Output Registers
