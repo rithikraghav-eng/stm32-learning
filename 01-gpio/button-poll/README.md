@@ -4,8 +4,6 @@
 
 Read a push-button input using GPIO polling on the STM32F401RE and use its state to control an LED.
 
-> **Implementation note:** Update the pin assignments and electrical details below to match the actual wiring and source code in this experiment. Do not assume the example pins are the ones used by your firmware.
-
 ## Hardware
 
 - **Board:** STM32 Nucleo-F401RE
