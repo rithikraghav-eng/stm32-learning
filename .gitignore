@@ -1,0 +1,20 @@
+# Build artifacts
+**/build/
+**/cmake-build-*/
+
+# Compiled files
+*.o
+*.elf
+*.bin
+*.hex
+*.map
+*.d
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# OS files
+.DS_Store
+Thumbs.db
