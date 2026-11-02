@@ -21,7 +21,7 @@
   #define RCC_AHB1ENR  (*(volatile uint32_t *)0x40023830) 
   #define GPIOA_MODER  (*(volatile uint32_t *)0x40020000)  
   #define GPIOA_ODR    (*(volatile uint32_t *)0x40020014)  
-  int main(void)
+  int main()
   {
       RCC_AHB1ENR |=  (1 << 0);    
       GPIOA_MODER |=  (1 << 10);  
