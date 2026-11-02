@@ -17,32 +17,20 @@
  */
 
 #include <stdint.h>
-#include <sys/_intsup.h>
 
-#define RCC_AHBENR1 (*(volatile uint32_t*)0x40023830U)
-#define GPIOA_MODER (*(volatile uint32_t*)0x40020000U)
-#define GPIOC_MODER (*(volatile uint32_t*)0x40020800U)
-#define GPIOA_ODR   (*(volatile uint32_t*)0x40020014U)
-#define GPIOA_BSSR  (*(volatile uint32_t*)0x40020018U)
-#define GPIOC_IDR   (*(volatile uint32_t*)0x40020810U)
+  #define RCC_AHB1ENR  (*(volatile uint32_t *)0x40023830) 
+  #define GPIOA_MODER  (*(volatile uint32_t *)0x40020000)  
+  #define GPIOA_ODR    (*(volatile uint32_t *)0x40020014)  
+  int main(void)
+  {
+      RCC_AHB1ENR |=  (1 << 0);    
+      GPIOA_MODER |=  (1 << 10);  
+      GPIOA_MODER &= ~(1 << 11);  
 
-
-int main(void)
-{
-    RCC_AHBENR1 |= (1U<<0);
-    RCC_AHBENR1 |= (1U<<2);
-    GPIOA_MODER |=(1U<<10);
-    GPIOC_MODER &=~(3U<<26);
-    
-    while(1){
-        uint32_t bs=(GPIOC_IDR>>13) & 1U;
-        if (bs==0){  
-        GPIOA_ODR |= (1U<<5);
-        for(int i=0; i<1000000; i++);
-        }
-        else{
-        GPIOA_ODR &= ~(1U<<5);
-        for(int i=0; i<100000; i++);
-        }
-    }
-}
+      while (1) {
+          GPIOA_ODR |=  (1 << 5);                     
+          for (volatile int i = 0; i < 1000000; i++);  
+          GPIOA_ODR &= ~(1 << 5);                     
+          for (volatile int i = 0; i < 1000000; i++);  
+      }
+  }
