@@ -80,8 +80,6 @@ stm32f401-learning/
 │
 ├── README.md
 │
-├── notebook/
-│
 ├── 01-gpio/
 │   ├── blink/
 │   ├── button-poll/
