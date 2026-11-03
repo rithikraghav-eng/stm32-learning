@@ -23,10 +23,25 @@
 #define GPIOA_MODER (*(volatile uint32_t*)0x40020000U)
 #define GPIOC_MODER (*(volatile uint32_t*)0x40020800U)
 #define GPIOA_ODR   (*(volatile uint32_t*)0x40020014U)
-#define GPIOA_BSSR  (*(volatile uint32_t*)0x40020018U)
+#define GPIOA_BSRR  (*(volatile uint32_t*)0x40020018U)
 #define GPIOC_IDR   (*(volatile uint32_t*)0x40020810U)
 
+void delay (uint32_t count){
+    while(count--){
 
+    }
+}
+
+uint8_t debounce(){
+    uint32_t bs=(GPIOC_IDR>>13) & 1U;
+    if (bs==0){
+        delay(20000U);
+        if (bs==0) {
+            return 1U;
+        }
+    }
+    return 0U;
+}
 int main(void)
 {
     RCC_AHBENR1 |= (1U<<0);
@@ -35,14 +50,11 @@ int main(void)
     GPIOC_MODER &=~(3U<<26);
     
     while(1){
-        uint32_t bs=(GPIOC_IDR>>13) & 1U;
-        if (bs==0){  
-        GPIOA_ODR |= (1U<<5);
-        for(int i=0; i<1000000; i++);
+        if(debounce()){
+            GPIOA_BSRR = (1U<<5);
         }
-        else{
-        GPIOA_ODR &= ~(1U<<5);
-        for(int i=0; i<100000; i++);
+        else {
+            GPIOA_BSRR = (1U<<21);
         }
     }
 }
